@@ -6,9 +6,9 @@ Add ingredients, get recipe
 ### Link
 https://spoonacular.com/food-api/docs
 ### Licensing
-<enter text here>
+enter text here
 ### Use
-<enter text here>
+enter text here
 ## TheCocktailDB API
 ### Link
 https://www.thecocktaildb.com/api.php
