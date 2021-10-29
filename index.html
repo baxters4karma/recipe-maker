@@ -1,12 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <header>
+      <h1>Looking for Dinner and a Movie</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum velit
+        officiis mollitia explicabo hic recusandae atque sunt et consectetur,
+        reiciendis aspernatur saepe aliquid commodi iusto aliquam quis ad amet
+        libero.
+      </p>
+    </header>
+    <body>
+      <!-- search form start -->
+      <div>
+        <select name="meal-type" class="select-dropdown">
+          <option value="" disabled selected>Pick A Meal Type</option>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Snack</option>
+        </select>
+        <select name="movie-type" class="select-dropdown">
+          <option value="" disabled selected>Pick A Movie Genre</option>
+          <option value="action">Action</option>
+          <option value="comedy">Comedy</option>
+          <option value="romance">Romance</option>
+          <option value="thriller">Thriller</option>
+          <option value="horror">Horror</option>
+        </select>
+        <button>Submit</button>
+      </div>
+      <!-- Search form end -->
+      <!-- Previous search - test only - this will be dynamical generated.
+      We could have it only save the one previous search and just 
+      overwrite the localStorage to make it easy -->
+      <div>
+        <p>Action</p>
+        <p>Dinner</p>
+      </div>
+      <!--End of previous search-->
+      <!-- Search results - dynamical generated-->
+      <div class="search-results">
+        <!-- Recipe results-->
+        <div>
+          <img src="./assets/images/meal-example.jpg" alt="" />
+          <div>
+            <h3>Chicken</h3>
+            <p>
+              Worlds best chicken with vegetables, fruit, a roll, and 100%
+              welchers juice on a gourmet food tray
+            </p>
+          </div>
+        </div>
+        <div>
+          <img src="./assets/images/meal-example.jpg" alt="" />
+          <div>
+            <h3>Chicken</h3>
+            <p>
+              Worlds best chicken with vegetables, fruit, a roll, and 100%
+              welchers juice on a gourmet food tray
+            </p>
+          </div>
+        </div>
+        <div>
+          <img src="./assets/images/meal-example.jpg" alt="" />
+          <div>
+            <h3>Chicken</h3>
+            <p>
+              Worlds best chicken with vegetables, fruit, a roll, and 100%
+              welchers juice on a gourmet food tray
+            </p>
+          </div>
+        </div>
+        <!-- Movie results -->
+        <div>
+          <div>
+            <img
+              src="./assets/images/titanic_1997_fr_original_film_art_1200x.jpeg"
+              alt=""
+            />
+            <div>
+              <h3>Titanic</h3>
+              <p>
+                A seventeen-year-old aristocrat falls in love with a kind but
+                poor artist aboard the luxurious, ill-fated R.M.S. Titanic.
+              </p>
+            </div>
+          </div>
+          <div>
+            <img
+              src="./assets/images/titanic_1997_fr_original_film_art_1200x.jpeg"
+              alt=""
+            />
+            <div>
+              <h3>Titanic</h3>
+              <p>
+                A seventeen-year-old aristocrat falls in love with a kind but
+                poor artist aboard the luxurious, ill-fated R.M.S. Titanic.
+              </p>
+            </div>
+          </div>
+          <div>
+            <img
+              src="./assets/images/titanic_1997_fr_original_film_art_1200x.jpeg"
+              alt=""
+            />
+            <div>
+              <h3>Titanic</h3>
+              <p>
+                A seventeen-year-old aristocrat falls in love with a kind but
+                poor artist aboard the luxurious, ill-fated R.M.S. Titanic.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </body>
 </html>
