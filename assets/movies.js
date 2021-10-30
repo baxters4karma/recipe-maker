@@ -65,11 +65,16 @@ function getMovieByGenreId(id) {
 // Dynamically create and populate drop-down box for movie genres
 function populateGenreDropDown(name) {
     var genreName = name;    
-    var genreOptionGroup = document.getElementById("movie-type");
-    var optionEl = document.createElement("option");
+    var genreDropdownGroup = document.getElementById("movie-dropdown");
+    var optionEl = document.createElement("li");
     optionEl.setAttribute((name = "value"), (value = genreName.toLowerCase()));    
     optionEl.setAttribute(name = "id", value = "genreOpt");
     optionEl.setAttribute(name = "class", value = "genreOpt");
-    optionEl.textContent = genreName;
-    genreOptionGroup.appendChild(optionEl);    
+    genreDropdownGroup.appendChild(optionEl);
+
+    var genreDropdownGroup = document.getElementById("genreOpt");
+    var genreOptions = document.createElement("a");
+    genreOptions.setAttribute("href", "#!");
+    genreOptions.textContent = genreName;
+    optionEl.appendChild(genreOptions);
 };

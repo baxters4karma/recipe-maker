@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Looking For Dinner and a Movie</title>
   </head>
   <body>
@@ -17,21 +18,20 @@
         libero.
       </p>
     </header>
-    <body>
       <!-- search form start -->
       <div>
         <h2>Make Your Selections!</h2>
-        <select name="meal-type" class="select-dropdown">
-          <option value="" disabled selected>Pick A Meal Type</option>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-          <option value="snack">Snack</option>
-        </select>
-        <select name="movie-type" class="select-dropdown" id="movie-type">
-          <option value="" disabled selected>Pick A Movie Genre</option>
-          <option value="action">Action</option>
-        </select>
+
+        <a class="dropdown-trigger btn" href="#" data-target="meal-dropdown">Choose Meal Type</a>
+        <ul id="meal-dropdown" class="dropdown-content">
+          <li value="breakfast"><a href="#!">Breakfast</a></li>
+          <li value="lunch"><a href="#!">Lunch</a></li>
+          <li value="dinner"><a href="#!">Dinner</a></li>
+          <li value="snack"><a href="#!">Snack</a></li>
+        </ul>
+
+        <a class="dropdown-trigger btn" href="#" data-target="movie-dropdown">Choose Movie Genre</a>
+        <ul id="movie-dropdown" class="dropdown-content"></ul>
         <button>Submit</button>
       </div>
       <!-- Search form end -->
@@ -120,7 +120,9 @@
           </div>
         </div>
       </div>
-    </body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="./assets/script.js"></script>
+      <script src="./assets/movies.js"></script>
   </body>
 </html>
 
