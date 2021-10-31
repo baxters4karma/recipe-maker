@@ -34,8 +34,9 @@ function getGenreList() {
     .then(function (res) {
         return res.json();
     })
-    .then(function (data) {        
-        for (var i = 0; i < data.genres.length; i++) {
+    .then(function (data) {
+        var genreLength = [7];   
+        for (var i = 0; i < genreLength; i++) {
             MOVIE_GENRE_ID = data.genres[i].id;
             MOVIE_GENRE_NAME = data.genres[i].name;
             populateGenreDropDown(MOVIE_GENRE_NAME);
