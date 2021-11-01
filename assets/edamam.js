@@ -4,6 +4,7 @@ var edamamIngredient;
 var edamamMealType;
 var edamamUrl;
 var edamamArray = [];
+var edamamIngredientsText;
 
 var breakfast = document.getElementById("breakfast");
 var lunch = document.getElementById("lunch");
@@ -31,7 +32,15 @@ function mealTypeAndFetch(mealSelected) {
 function submitRun() {
   for (var i = 0; i < 3; i++) {
     document.getElementById("mealPic" + i).src = edamamArray["hits"][i]["recipe"]["image"];
-    document.getElementById("mealPic" + i).textContent = edamamArray["hits"][i]["recipe"]["label"];
+    document.getElementById("mealLabel" + i).textContent = edamamArray["hits"][i]["recipe"]["label"];
+
+    edamamIngredientsText = "";
+
+    for (var x = 0; x < edamamArray["hits"][i]["recipe"]["ingredients"].length; x++) {
+      edamamIngredientsText += edamamArray["hits"][i]["recipe"]["ingredients"][x].text;
+    }
+
+    document.getElementById("mealText" + i).textContent = edamamIngredientsText;
   }
 };
 
