@@ -120,15 +120,8 @@ function populateGenreDropDown(name) {
   var genreDropdownGroup = document.getElementById("movie-dropdown");
   var optionEl = document.createElement("option");
   optionEl.setAttribute("value", genreName.toLowerCase());
-  // optionEl.setAttribute("id", "genreOpt");
-  // optionEl.setAttribute("class", "genreOpt");
   optionEl.textContent = genreName;
   genreDropdownGroup.appendChild(optionEl);
-
-  // var genreDropdownGroup = document.getElementById("genreOpt");
-  // var genreOptions = document.createElement("a");
-  // genreOptions.setAttribute("href", "#!");
-  // optionEl.appendChild(genreOptions);
 }
 
 // Receive user movie type selection, return movie details
