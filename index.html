@@ -1,71 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <title>Looking For Dinner and a Movie</title>
   </head>
-  
+
   <body>
     <header>
       <h1>Looking for Dinner and a Movie</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum velit
+        √ Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum velit
         officiis mollitia explicabo hic recusandae atque sunt et consectetur,
         reiciendis aspernatur saepe aliquid commodi iusto aliquam quis ad amet
         libero.
       </p>
     </header>
 
-      <!-- search form start -->
+    <!-- search form start -->
     <div>
       <div class="row">
-        <div class="col s12 m12 l12 center-align" >
-
+        <div class="col s12 m12 l12 center-align">
           <h2>Make Your Selections!</h2>
-
-          <a class="dropdown-trigger btn" href="#" data-target="meal-dropdown">Choose Meal Type</a>
-          <ul id="meal-dropdown" class="dropdown-content">
-            <li value="breakfast"><a href="#!">Breakfast</a></li>
-            <li value="lunch"><a href="#!">Lunch</a></li>
-            <li value="dinner"><a href="#!">Dinner</a></li>
-            <li value="snack"><a href="#!">Snack</a></li>
-          </ul>
-
-          <a class="dropdown-trigger btn" href="#" data-target="movie-dropdown">Choose Movie Genre</a>
-          <ul id="movie-dropdown" class="dropdown-content"></ul>
-
-          <button class="waves-effect waves-light btn">Submit</button>
+          <form id="mealSearch">
+            <div class="input-field col s12">
+              <select id="meal-type">
+                <option value="" disabled selected>Choose Meal Type</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snack">Snack</option>
+              </select>
+            </div>
+            <div class="input-field col s12" >
+              <select id="movie-dropdown">
+                <option value="" disabled selected>Choose Movie Genre</option>
+                <option value="action">Action</option>
+                <option value="adventure">Adventure</option>
+                <option value="animation">Animation</option>
+                <option value="comedy">Comedy</option>
+                <option value="crime">Crime</option>
+                <option value="documentary">Documentary</option>
+                <option value="drama">Drama</option>
+              </select>
+            </div>
+            <button class="waves-effect waves-light btn">Submit</button>
+          </form>
         </div>
 
         <!-- Search form end -->
         <!-- Previous search - test only - this will be dynamical generated.
         We could have it only save the one previous search and just 
         overwrite the localStorage to make it easy -->
-      
       </div>
 
       <div class="row center-align">
         <h2>Previous Search</h2>
         <p class="col s6 m6 l6 flow-text">Action</p>
         <p class="col s6 m6 l6 flow-text">Dinner</p>
-      </div>      
+      </div>
       <!--End of previous search-->
-      
+
       <!-- Search results - dynamical generated-->
       <div class="search-results center-align">
-         <h2> Search Results</h2>
+        <h2>Search Results</h2>
         <!-- Recipe results-->
         <div class="row">
-          <img class="col s6 m6 l6" src="./assets/images/meal-example.jpg" alt="Image of what's for dinner" />
+          <img
+            class="col s6 m6 l6"
+            src="./assets/images/meal-example.jpg"
+            alt="Image of what's for dinner"
+          />
           <div>
             <h3>Chicken</h3>
             <p class="flow-text">
@@ -75,7 +93,11 @@
           </div>
         </div>
         <div class="row">
-          <img class="col s6 m6 l6" src="./assets/images/meal-example.jpg" alt="" />
+          <img
+            class="col s6 m6 l6"
+            src="./assets/images/meal-example.jpg"
+            alt=""
+          />
           <div>
             <h3>Chicken</h3>
             <p class="flow-text">
@@ -86,7 +108,11 @@
         </div>
 
         <div class="row">
-          <img class="col s6 m6 l6" src="./assets/images/meal-example.jpg" alt="" />
+          <img
+            class="col s6 m6 l6"
+            src="./assets/images/meal-example.jpg"
+            alt=""
+          />
           <div>
             <h3>Chicken</h3>
             <p class="flow-text">
@@ -97,9 +123,10 @@
         </div>
         <!-- Movie results -->
         <div id="movie-results">
-
           <div id="movie" class="row">
-            <img id="movie-img" class="col s6 m6 l6"
+            <img
+              id="movie-img"
+              class="col s6 m6 l6"
               src="./assets/images/titanic_1997_fr_original_film_art_1200x.jpeg"
               alt=""
             />
@@ -113,7 +140,9 @@
           </div>
 
           <div id="movie" class="row">
-            <img id="movie-img" class="col s6 m6 l6"
+            <img
+              id="movie-img"
+              class="col s6 m6 l6"
               src="./assets/images/titanic_1997_fr_original_film_art_1200x.jpeg"
               alt=""
             />
@@ -127,7 +156,9 @@
           </div>
 
           <div id="movie" class="row">
-            <img id="movie-img" class="col s6 m6 l6"
+            <img
+              id="movie-img"
+              class="col s6 m6 l6"
               src="./assets/images/titanic_1997_fr_original_film_art_1200x.jpeg"
               alt=""
             />
@@ -143,12 +174,12 @@
       </div>
     </div>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <script src="./assets/script.js"></script>
-      <script src="./assets/movies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/script.js"></script>
+    <script src="./assets/movies.js"></script>
   </body>
 
   <footer>
-      <h6 class="center-align">Dinner and a Movie</h6>
+    <h6 class="center-align">Dinner and a Movie</h6>
   </footer>
 </html>
