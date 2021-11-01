@@ -19,12 +19,7 @@ var MOVIE_GENRE_NAME = "";
 var MOVIE_GENRE_LIST = { id: "", name: "" },
   genreArr = [];
 
-getGenreList();
-
 var MEAL_SEARCH_FORM = document.querySelector("#mealSearch");
-
-// Will replace the hard-coded genre type with userSelection once that is working
-getMovieDetails("Animation");
 
 // capture users selections for meal type and movie genre
 function searchHandler(event) {
@@ -32,45 +27,51 @@ function searchHandler(event) {
 
   var mealTypeInput = document.getElementById("meal-type");
   var mealType = mealTypeInput.options[mealTypeInput.selectedIndex].text;
-  console.log(mealType);
-
+  
   var movieGenreInput = document.getElementById("movie-dropdown");
   var movieGenre = movieGenreInput.options[movieGenreInput.selectedIndex].text;
-  console.log(movieGenre);
+  
+  // pass user-selected meal type to function
+  getMealTypeDetails(mealType);
+
+  // pass user-selected movie genre to function
+  getMovieDetails(movieGenre);
 
 }
 
-// Get or "discover" movies
-function getMovie() {
-  fetch(MOVIE_BASE_URL + MOVIE_DISCOVER + MOVIE_API_KEY)
+// Get recipe data
+function getMealTypeDetails(userSelection) {
+  var mealType = userSelection;
+  var searchType = "recipe";
+
+  var recipeBaseUrl = "https://api.edamam.com/";
+  var recipeSearch = "api/recipes/v2?type=public&q=" + mealType;  
+  var recipeAppId = "&app_id=0f5760c9";
+  var recipeAppKey = "&app_key=238498a4e517362b8c1dbeaa365400b9";
+  var recipeParams =
+    "&imageSize=THUMBNAIL&field=label&field=image&field=source&field=url&field=yield&field=ingredientLines";  
+  var requestUrl = recipeBaseUrl + recipeSearch + recipeAppId + recipeAppKey + recipeParams;
+
+  fetch(requestUrl)
     .then(function (res) {
       return res.json();
     })
     .then(function (data) {
-      console.log(data.results);
-    });
-}
-
-// Get list of movie genres
-function getGenreList() {
-  fetch(MOVIE_GENRE_LIST_URL)
-    .then(function (res) {
-      return res.json();
-    })
-    .then(function (data) {
-      var genreArrLength = 7;
-      for (var i = 0; i < genreArrLength; i++) {
-        MOVIE_GENRE_ID = data.genres[i].id;
-        MOVIE_GENRE_NAME = data.genres[i].name;
-        genreArr.push(MOVIE_GENRE_ID, MOVIE_GENRE_NAME);
-        populateGenreDropDown(MOVIE_GENRE_NAME);
+      for (i = 0; i < 3; i++) {
+        var detailObj = [],
+          recipe = { title: "", overview: "", imgPath: "" };        
+        detailObj.title = data.hits[i].recipe.label;        
+        detailObj.overview = data.hits[i].recipe.ingredientLines;        
+        detailObj.imgPath = data.hits[i].recipe.image;        
+        displaySearchResults(detailObj,searchType);
       }
     });
 }
 
 // Get movie data by Genre ID
 function getMovieByGenreId(id) {
-  genreId = id;
+  var genreId = id;
+  var searchType = "movie";
   fetch(
     MOVIE_BASE_URL +
       MOVIE_DISCOVER +
@@ -83,49 +84,87 @@ function getMovieByGenreId(id) {
       return res.json();
     })
     .then(function (data) {
-      //console.log(data.results);
-      //   return data.results;
       for (i = 0; i < 3; i++) {
-        var movieDetailObj = { title: "", overview: "", imgPath: "" };
-        movieDetailObj.title = data.results[i].title;
-        movieDetailObj.overview = data.results[i].overview;
-        movieDetailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
-
-        var movieEl = document.getElementById("movie");
-
-        var movieImgEl = document.getElementById("movie-img");
-        movieImgEl.setAttribute("src", movieDetailObj.imgPath);
-        movieImgEl.setAttribute(
-          "alt",
-          "Size width is 200 of this poster picture for " + movieDetailObj.title
-        );
-        movieEl.appendChild(movieImgEl);
-
-        var movieContentEl = document.getElementById("movie-content");
-
-        var movieTitleEl = document.getElementById("movie-title");
-        movieTitleEl.textContent = movieDetailObj.title;
-        movieContentEl.appendChild(movieTitleEl);
-
-        var movieTextEl = document.getElementById("movie-text");
-        movieTextEl.textContent = movieDetailObj.overview;
-        movieContentEl.appendChild(movieTextEl);
+        var detailObj = { title: "", overview: "", imgPath: "" };
+        detailObj.title = data.results[i].title;
+        detailObj.overview = data.results[i].overview;
+        detailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
+        displaySearchResults(detailObj,searchType);
       }
     });
 }
 
-// Dynamically create and populate drop-down box for movie genres
-function populateGenreDropDown(name) {
-  var genreName = name;
-  var genreDropdownGroup = document.getElementById("movie-dropdown");
-  var optionEl = document.createElement("option");
-  optionEl.setAttribute("value", genreName.toLowerCase());
-  optionEl.textContent = genreName;
-  genreDropdownGroup.appendChild(optionEl);
+// dynamically creating and/or building the HTML that
+// will hold the search display results
+function displaySearchResults(detailObj, searchType) {
+  
+  // variable to hold search type as defined in fetch/get call
+  var searchResultsType = searchType;
+
+  // set id values specific to search type ('movie' or 'recipe')
+  if (searchResultsType === "movie") {
+    var resultsElId = "movie-results";
+    var divTypeElId = "movie";
+    var imgElId = "movie-img";
+    var contentElId = "movie-content";
+    var titleElId = "movie-title";
+    var textElId = "movie-text";
+  } else {
+    var resultsElId = "recipe-results";
+    var divTypeElId = "recipe";
+    var imgElId = "recipe-img";
+    var contentElId = "recipe-content";
+    var titleElId = "recipe-title";
+    var textElId = "recipe-text";
+  }
+
+  // getting DOM div element to begin dynamic creation of search results
+  var resultsEl = document.getElementById(resultsElId);
+
+  // dynamically creating and appending movie/recipe div
+  // that holds image and content and setting needed attributes
+  var divTypeEl = document.createElement("div");
+  divTypeEl.setAttribute("id", divTypeElId);
+  divTypeEl.setAttribute("class", "row");
+  resultsEl.appendChild(divTypeEl);
+
+  // dynamically creating and appending movie/recipe img tags
+  // and setting needed attributes
+  var imgEl = document.createElement("img");
+  imgEl.setAttribute("id", imgElId);
+  imgEl.setAttribute("class", "col s6 m6 l6");
+  imgEl.setAttribute("src", detailObj.imgPath);
+  imgEl.setAttribute(
+    "alt",
+    "Size width is 200 of this poster picture for " + detailObj.title
+  );
+  divTypeEl.appendChild(imgEl);
+
+  // dynamically creating and appending movie/recipe content div
+  // that holds title and text and setting needed attributes
+  var contentEl = document.createElement("div");
+  contentEl.setAttribute("id", contentElId);
+  contentEl.setAttribute("class", "col s6 m6 l6");
+  divTypeEl.appendChild(contentEl);
+
+  // dynamically creating and appending movie/recipe title
+  // and setting needed attributes
+  var titleEl = document.createElement("h3");
+  titleEl.setAttribute("id", titleElId);
+  titleEl.textContent = detailObj.title;
+  contentEl.appendChild(titleEl);
+
+  // dynamically creating and appending movie/recipe text
+  // and setting needed attributes
+  var textEl = document.createElement("p");
+  textEl.setAttribute("id", textElId);
+  textEl.setAttribute("class", "flow-text");
+  textEl.textContent = detailObj.overview;
+  contentEl.appendChild(textEl);
 }
 
 // Receive user movie type selection, return movie details
-function getMovieDetails(userSelection) {
+function getMovieDetails(userSelection) {  
   var userGenre = userSelection;
   var genreId = "";
   var genreName = "";
@@ -160,14 +199,10 @@ function getMovieDetails(userSelection) {
       break;
   }
 
+  // pass genre ID of user selected genre to API call
   getMovieByGenreId(genreId);
-  //displaySearchResults(movieDetailObj);
+  
 }
-
-// Dynamically create search result blocks
-// function displaySearchResults(obj) {
-
-// };
 
 // event listener for users selections
 MEAL_SEARCH_FORM.addEventListener("submit", searchHandler);
