@@ -15,10 +15,11 @@ function mealTypeAndFetch(mealSelected) {
   edamamMealType = mealSelected;
   edamamUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=" + edamamIngredient + "&app_id=ce22d420&app_key=484cfb8615f1c6ea4ed4312af673949f&" + "mealType=" + edamamMealType + "&random=true";
 
+  console.log(mealSelected);
   document.getElementById("meal-dropdown-text").textContent = mealSelected;
 };
 
-breakfast.addEventListener('click', mealTypeAndFetch("breakfast"));
-lunch.addEventListener('click', mealTypeAndFetch("lunch"));
-dinner.addEventListener('click', mealTypeAndFetch("dinner"));
-snack.addEventListener('click', mealTypeAndFetch("snack"));
+breakfast.addEventListener('click', function () { mealTypeAndFetch("breakfast"); });
+lunch.addEventListener('click', function () { mealTypeAndFetch("lunch"); });
+dinner.addEventListener('click', function () { mealTypeAndFetch("dinner"); });
+snack.addEventListener('click', function () { mealTypeAndFetch("snack"); });
