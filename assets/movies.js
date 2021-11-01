@@ -19,12 +19,7 @@ var MOVIE_GENRE_NAME = "";
 var MOVIE_GENRE_LIST = { id: "", name: "" },
   genreArr = [];
 
-getGenreList();
-
 var MEAL_SEARCH_FORM = document.querySelector("#mealSearch");
-
-// Will replace the hard-coded genre type with userSelection once that is working
-getMovieDetails("Animation");
 
 // capture users selections for meal type and movie genre
 function searchHandler(event) {
@@ -36,7 +31,12 @@ function searchHandler(event) {
 
   var movieGenreInput = document.getElementById("movie-dropdown");
   var movieGenre = movieGenreInput.options[movieGenreInput.selectedIndex].text;
-  console.log(movieGenre);
+  
+  // pass user-selected meal type to function
+  //getMealTypeDetails(mealType);
+
+  // pass user-selected movie genre to function
+  getMovieDetails(movieGenre);
 
 }
 
@@ -48,23 +48,6 @@ function getMovie() {
     })
     .then(function (data) {
       console.log(data.results);
-    });
-}
-
-// Get list of movie genres
-function getGenreList() {
-  fetch(MOVIE_GENRE_LIST_URL)
-    .then(function (res) {
-      return res.json();
-    })
-    .then(function (data) {
-      var genreArrLength = 7;
-      for (var i = 0; i < genreArrLength; i++) {
-        MOVIE_GENRE_ID = data.genres[i].id;
-        MOVIE_GENRE_NAME = data.genres[i].name;
-        genreArr.push(MOVIE_GENRE_ID, MOVIE_GENRE_NAME);
-        populateGenreDropDown(MOVIE_GENRE_NAME);
-      }
     });
 }
 
@@ -91,9 +74,16 @@ function getMovieByGenreId(id) {
         movieDetailObj.overview = data.results[i].overview;
         movieDetailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
 
-        var movieEl = document.getElementById("movie");
+        var movieResultsEl = document.getElementById("movie-results");
 
-        var movieImgEl = document.getElementById("movie-img");
+        var movieEl = document.createElement("div");
+        movieEl.setAttribute("id", "movie");
+        movieEl.setAttribute("class", "row");
+        movieResultsEl.appendChild(movieEl);
+        
+        var movieImgEl = document.createElement("img");
+        movieImgEl.setAttribute("id", "movie-img");
+        movieImgEl.setAttribute("class", "col s6 m6 l6");
         movieImgEl.setAttribute("src", movieDetailObj.imgPath);
         movieImgEl.setAttribute(
           "alt",
@@ -101,31 +91,27 @@ function getMovieByGenreId(id) {
         );
         movieEl.appendChild(movieImgEl);
 
-        var movieContentEl = document.getElementById("movie-content");
+        var movieContentEl = document.createElement("div");
+        movieContentEl.setAttribute("id", "movie-content");
+        movieContentEl.setAttribute("class", "col s6 m6 l6");
+        movieEl.appendChild(movieContentEl);
 
-        var movieTitleEl = document.getElementById("movie-title");
+        var movieTitleEl = document.createElement("h3");
+        movieTitleEl.setAttribute("id", "movie-title");
         movieTitleEl.textContent = movieDetailObj.title;
         movieContentEl.appendChild(movieTitleEl);
 
-        var movieTextEl = document.getElementById("movie-text");
+        var movieTextEl = document.createElement("p");
+        movieTextEl.setAttribute("id", "movie-text");
+        movieTextEl.setAttribute("class", "flow-text");
         movieTextEl.textContent = movieDetailObj.overview;
         movieContentEl.appendChild(movieTextEl);
       }
     });
 }
 
-// Dynamically create and populate drop-down box for movie genres
-function populateGenreDropDown(name) {
-  var genreName = name;
-  var genreDropdownGroup = document.getElementById("movie-dropdown");
-  var optionEl = document.createElement("option");
-  optionEl.setAttribute("value", genreName.toLowerCase());
-  optionEl.textContent = genreName;
-  genreDropdownGroup.appendChild(optionEl);
-}
-
 // Receive user movie type selection, return movie details
-function getMovieDetails(userSelection) {
+function getMovieDetails(userSelection) {  
   var userGenre = userSelection;
   var genreId = "";
   var genreName = "";
@@ -160,6 +146,7 @@ function getMovieDetails(userSelection) {
       break;
   }
 
+  // pass genre ID of user selected genre to API call
   getMovieByGenreId(genreId);
   //displaySearchResults(movieDetailObj);
 }
