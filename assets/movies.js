@@ -21,8 +21,24 @@ var MOVIE_GENRE_LIST = { id: "", name: "" },
 
 getGenreList();
 
+var MEAL_SEARCH_FORM = document.querySelector("#mealSearch");
+
 // Will replace the hard-coded genre type with userSelection once that is working
 getMovieDetails("Animation");
+
+// capture users selections for meal type and movie genre
+function searchHandler(event) {
+  event.preventDefault();
+
+  var mealTypeInput = document.getElementById("meal-type");
+  var mealType = mealTypeInput.options[mealTypeInput.selectedIndex].text;
+  console.log(mealType);
+
+  var movieGenreInput = document.getElementById("movie-dropdown");
+  var movieGenre = movieGenreInput.options[movieGenreInput.selectedIndex].text;
+  console.log(movieGenre);
+
+}
 
 // Get or "discover" movies
 function getMovie() {
@@ -42,13 +58,13 @@ function getGenreList() {
       return res.json();
     })
     .then(function (data) {
-        var genreArrLength = 7;
-        for (var i = 0; i < genreArrLength; i++) {
-            MOVIE_GENRE_ID = data.genres[i].id;
-            MOVIE_GENRE_NAME = data.genres[i].name;
-            genreArr.push(MOVIE_GENRE_ID, MOVIE_GENRE_NAME);
-            populateGenreDropDown(MOVIE_GENRE_NAME);            
-        }        
+      var genreArrLength = 7;
+      for (var i = 0; i < genreArrLength; i++) {
+        MOVIE_GENRE_ID = data.genres[i].id;
+        MOVIE_GENRE_NAME = data.genres[i].name;
+        genreArr.push(MOVIE_GENRE_ID, MOVIE_GENRE_NAME);
+        populateGenreDropDown(MOVIE_GENRE_NAME);
+      }
     });
 }
 
@@ -67,96 +83,98 @@ function getMovieByGenreId(id) {
       return res.json();
     })
     .then(function (data) {
-        //console.log(data.results);
-        //   return data.results;
-        for (i = 0; i < 3; i++) {
-          var movieDetailObj = { "title": "", "overview": "", "imgPath": "" };
-          movieDetailObj.title = data.results[i].title;
-          movieDetailObj.overview = data.results[i].overview;
-          movieDetailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
-                    
-          var movieEl = document.getElementById("movie");
-        
-          var movieImgEl = document.getElementById("movie-img");
-          movieImgEl.setAttribute("src", movieDetailObj.imgPath);
-          movieImgEl.setAttribute(
-            "alt",
-            "Size width is 200 of this poster picture for " +
-              movieDetailObj.title
-          );
-          movieEl.appendChild(movieImgEl);
-          
-          var movieContentEl = document.getElementById("movie-content");
+      //console.log(data.results);
+      //   return data.results;
+      for (i = 0; i < 3; i++) {
+        var movieDetailObj = { title: "", overview: "", imgPath: "" };
+        movieDetailObj.title = data.results[i].title;
+        movieDetailObj.overview = data.results[i].overview;
+        movieDetailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
 
-          var movieTitleEl = document.getElementById("movie-title");          
-          movieTitleEl.textContent = movieDetailObj.title;
-          movieContentEl.appendChild(movieTitleEl);
+        var movieEl = document.getElementById("movie");
 
-          var movieTextEl = document.getElementById("movie-text");        
-          movieTextEl.textContent = movieDetailObj.overview;
-          movieContentEl.appendChild(movieTextEl);          
-        }        
-    });        
+        var movieImgEl = document.getElementById("movie-img");
+        movieImgEl.setAttribute("src", movieDetailObj.imgPath);
+        movieImgEl.setAttribute(
+          "alt",
+          "Size width is 200 of this poster picture for " + movieDetailObj.title
+        );
+        movieEl.appendChild(movieImgEl);
+
+        var movieContentEl = document.getElementById("movie-content");
+
+        var movieTitleEl = document.getElementById("movie-title");
+        movieTitleEl.textContent = movieDetailObj.title;
+        movieContentEl.appendChild(movieTitleEl);
+
+        var movieTextEl = document.getElementById("movie-text");
+        movieTextEl.textContent = movieDetailObj.overview;
+        movieContentEl.appendChild(movieTextEl);
+      }
+    });
 }
 
 // Dynamically create and populate drop-down box for movie genres
 function populateGenreDropDown(name) {
   var genreName = name;
   var genreDropdownGroup = document.getElementById("movie-dropdown");
-  var optionEl = document.createElement("li");
+  var optionEl = document.createElement("option");
   optionEl.setAttribute("value", genreName.toLowerCase());
-  optionEl.setAttribute("id", "genreOpt");
-  optionEl.setAttribute("class", "genreOpt");
+  // optionEl.setAttribute("id", "genreOpt");
+  // optionEl.setAttribute("class", "genreOpt");
+  optionEl.textContent = genreName;
   genreDropdownGroup.appendChild(optionEl);
 
-  var genreDropdownGroup = document.getElementById("genreOpt");
-  var genreOptions = document.createElement("a");
-  genreOptions.setAttribute("href", "#!");
-  genreOptions.textContent = genreName;
-  optionEl.appendChild(genreOptions);
-};
+  // var genreDropdownGroup = document.getElementById("genreOpt");
+  // var genreOptions = document.createElement("a");
+  // genreOptions.setAttribute("href", "#!");
+  // optionEl.appendChild(genreOptions);
+}
 
 // Receive user movie type selection, return movie details
 function getMovieDetails(userSelection) {
-    var userGenre = userSelection;
-    var genreId = "";
-    var genreName = "";
-    switch (userGenre) {
-      case "Action":
-        genreId = 28;
-        genreName = "Action";
-        break;
-      case "Adventure":
-        genreId = 12;
-        genreName = "Adventure";
-        break;
-      case "Animation":
-        genreId = 16;
-        genreName = "Animation";
-        break;
-      case "Comedy":
-        genreId = 35;
-        genreName = "Comedy";
-        break;
-      case "Crime":
-        genreId = 80;
-        genreName = "Crime";
-        break;
-      case "Documentary":
-        genreId = 99;
-        genreName = "Documentary";
-        break;
-      case "Drama":
-        genreId = 18;
-        genreName = "Drama";
-        break;      
-    }
-    
-    getMovieByGenreId(genreId);
-    //displaySearchResults(movieDetailObj);    
+  var userGenre = userSelection;
+  var genreId = "";
+  var genreName = "";
+  switch (userGenre) {
+    case "Action":
+      genreId = 28;
+      genreName = "Action";
+      break;
+    case "Adventure":
+      genreId = 12;
+      genreName = "Adventure";
+      break;
+    case "Animation":
+      genreId = 16;
+      genreName = "Animation";
+      break;
+    case "Comedy":
+      genreId = 35;
+      genreName = "Comedy";
+      break;
+    case "Crime":
+      genreId = 80;
+      genreName = "Crime";
+      break;
+    case "Documentary":
+      genreId = 99;
+      genreName = "Documentary";
+      break;
+    case "Drama":
+      genreId = 18;
+      genreName = "Drama";
+      break;
+  }
+
+  getMovieByGenreId(genreId);
+  //displaySearchResults(movieDetailObj);
 }
 
 // Dynamically create search result blocks
 // function displaySearchResults(obj) {
-  
+
 // };
+
+// event listener for users selections
+MEAL_SEARCH_FORM.addEventListener("submit", searchHandler);
