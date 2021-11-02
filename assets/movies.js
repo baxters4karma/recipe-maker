@@ -52,6 +52,7 @@ function getMealTypeDetails(userSelection) {
     "&imageSize=THUMBNAIL&field=label&field=image&field=source&field=url&field=yield&field=ingredientLines";
   var requestUrl = recipeBaseUrl + recipeSearch + recipeAppId + recipeAppKey + recipeParams + "&random=true";
 
+
   fetch(requestUrl)
     .then(function (res) {
       return res.json();
@@ -59,10 +60,11 @@ function getMealTypeDetails(userSelection) {
     .then(function (data) {
       for (i = 0; i < 3; i++) {
         var detailObj = [],
-          recipe = { title: "", overview: "", imgPath: "" };
+          recipe = { title: "", overview: "", imgPath: "", link: "" };
         detailObj.title = data.hits[i].recipe.label;
         detailObj.overview = data.hits[i].recipe.ingredientLines;
         detailObj.imgPath = data.hits[i].recipe.image;
+        detailObj.link = data.hits[i].recipe.url;
         displaySearchResults(detailObj, searchType);
       }
     });
@@ -160,6 +162,12 @@ function displaySearchResults(detailObj, searchType) {
   textEl.setAttribute("id", textElId);
   textEl.setAttribute("class", "flow-text");
   textEl.textContent = detailObj.overview;
+  contentEl.appendChild(textEl);
+
+  var textEl = document.createElement("p");
+  textEl.setAttribute("id", textElId);
+  textEl.setAttribute("class", "flow-text");
+  textEl.textContent = detailObj.link;
   contentEl.appendChild(textEl);
 }
 
