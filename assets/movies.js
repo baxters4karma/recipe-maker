@@ -21,6 +21,9 @@ var MOVIE_GENRE_LIST = { id: "", name: "" },
 
 var MEAL_SEARCH_FORM = document.querySelector("#mealSearch");
 
+var edamamArray = [];
+var movieArray = [];
+
 // capture users selections for meal type and movie genre
 function searchHandler(event) {
   event.preventDefault();
@@ -65,6 +68,7 @@ function getMealTypeDetails(userSelection) {
         detailObj.overview = data.hits[i].recipe.ingredientLines;
         detailObj.imgPath = data.hits[i].recipe.image;
         detailObj.link = data.hits[i].recipe.url;
+        edamamArray = data;
         displaySearchResults(detailObj, searchType);
       }
     });
@@ -91,6 +95,7 @@ function getMovieByGenreId(id) {
         detailObj.title = data.results[i].title;
         detailObj.overview = data.results[i].overview;
         detailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
+        movieArray = data;
         displaySearchResults(detailObj, searchType);
       }
     });
@@ -103,6 +108,14 @@ function displaySearchResults(detailObj, searchType) {
   // variable to hold search type as defined in fetch/get call
   var searchResultsType = searchType;
 
+  toDelete = document.getElementsByClassName("to-delete");
+
+  if (toDelete.length === 6) {
+    while (toDelete.length > 0) {
+      toDelete[0].remove(toDelete[0]);
+    }
+  }
+
   // set id values specific to search type ('movie' or 'recipe')
   if (searchResultsType === "movie") {
     var resultsElId = "movie-results";
@@ -111,6 +124,7 @@ function displaySearchResults(detailObj, searchType) {
     var contentElId = "movie-content";
     var titleElId = "movie-title";
     var textElId = "movie-text";
+    localStorage.setItem("movieArray", JSON.stringify(movieArray));
   } else {
     var resultsElId = "recipe-results";
     var divTypeElId = "recipe";
@@ -118,6 +132,7 @@ function displaySearchResults(detailObj, searchType) {
     var contentElId = "recipe-content";
     var titleElId = "recipe-title";
     var textElId = "recipe-text";
+    localStorage.setItem("edamamArray", JSON.stringify(edamamArray));
   }
 
   // getting DOM div element to begin dynamic creation of search results
@@ -127,7 +142,7 @@ function displaySearchResults(detailObj, searchType) {
   // that holds image and content and setting needed attributes
   var divTypeEl = document.createElement("div");
   divTypeEl.setAttribute("id", divTypeElId);
-  divTypeEl.setAttribute("class", "row");
+  divTypeEl.setAttribute("class", "row to-delete");
   resultsEl.appendChild(divTypeEl);
 
   // dynamically creating and appending movie/recipe img tags
@@ -166,7 +181,7 @@ function displaySearchResults(detailObj, searchType) {
 
   var textEl = document.createElement("a");
   textEl.setAttribute("id", textElId);
-  textEl.setAttribute("class", "flow-text");
+  textEl.setAttribute("class", "flow-text recipe-link");
   textEl.setAttribute("href", detailObj.link);
   textEl.textContent = detailObj.link;
   contentEl.appendChild(textEl);
@@ -215,3 +230,38 @@ function getMovieDetails(userSelection) {
 
 // event listener for users selections
 MEAL_SEARCH_FORM.addEventListener("submit", searchHandler);
+
+
+var loadArrays = function () {
+  movieArray = JSON.parse(localStorage.getItem("movieArray"));
+  if (!movieArray) {
+    movieArray = [];
+  } if (movieArray.length != 0) {
+    for (i = 0; i < 3; i++) {
+      var searchType = "movie";
+      var detailObj = { title: "", overview: "", imgPath: "" };
+      detailObj.title = movieArray.results[i].title;
+      detailObj.overview = movieArray.results[i].overview;
+      detailObj.imgPath = MOVIE_IMG + movieArray.results[i].poster_path;
+      displaySearchResults(detailObj, searchType);
+    }
+  }
+  edamamArray = JSON.parse(localStorage.getItem("edamamArray"));
+  if (!edamamArray) {
+    edamamArray = [];
+  } if (edamamArray.length != 0) {
+    for (i = 0; i < 3; i++) {
+      var searchType = "recipe";
+      var detailObj = [],
+        recipe = { title: "", overview: "", imgPath: "", link: "" };
+      detailObj.title = edamamArray.hits[i].recipe.label;
+      detailObj.overview = edamamArray.hits[i].recipe.ingredientLines;
+      detailObj.imgPath = edamamArray.hits[i].recipe.image;
+      detailObj.link = edamamArray.hits[i].recipe.url;
+      displaySearchResults(detailObj, searchType);
+    }
+  }
+};
+
+loadArrays();
+
