@@ -108,6 +108,14 @@ function displaySearchResults(detailObj, searchType) {
   // variable to hold search type as defined in fetch/get call
   var searchResultsType = searchType;
 
+  toDelete = document.getElementsByClassName("to-delete");
+
+  if (toDelete.length === 6) {
+    while (toDelete.length > 0) {
+      toDelete[0].remove(toDelete[0]);
+    }
+  }
+
   // set id values specific to search type ('movie' or 'recipe')
   if (searchResultsType === "movie") {
     var resultsElId = "movie-results";
@@ -134,7 +142,7 @@ function displaySearchResults(detailObj, searchType) {
   // that holds image and content and setting needed attributes
   var divTypeEl = document.createElement("div");
   divTypeEl.setAttribute("id", divTypeElId);
-  divTypeEl.setAttribute("class", "row");
+  divTypeEl.setAttribute("class", "row to-delete");
   resultsEl.appendChild(divTypeEl);
 
   // dynamically creating and appending movie/recipe img tags
