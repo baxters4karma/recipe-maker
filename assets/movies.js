@@ -173,7 +173,7 @@ function displaySearchResults(detailObj, searchType) {
 
   var textEl = document.createElement("a");
   textEl.setAttribute("id", textElId);
-  textEl.setAttribute("class", "flow-text");
+  textEl.setAttribute("class", "flow-text recipe-link");
   textEl.setAttribute("href", detailObj.link);
   textEl.textContent = detailObj.link;
   contentEl.appendChild(textEl);
