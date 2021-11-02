@@ -27,10 +27,10 @@ function searchHandler(event) {
 
   var mealTypeInput = document.getElementById("meal-type");
   var mealType = mealTypeInput.options[mealTypeInput.selectedIndex].text;
-  
+
   var movieGenreInput = document.getElementById("movie-dropdown");
   var movieGenre = movieGenreInput.options[movieGenreInput.selectedIndex].text;
-  
+
   // pass user-selected meal type to function
   getMealTypeDetails(mealType);
 
@@ -45,12 +45,12 @@ function getMealTypeDetails(userSelection) {
   var searchType = "recipe";
 
   var recipeBaseUrl = "https://api.edamam.com/";
-  var recipeSearch = "api/recipes/v2?type=public&q=" + mealType;  
+  var recipeSearch = "api/recipes/v2?type=public&q=" + mealType;
   var recipeAppId = "&app_id=0f5760c9";
   var recipeAppKey = "&app_key=238498a4e517362b8c1dbeaa365400b9";
   var recipeParams =
-    "&imageSize=THUMBNAIL&field=label&field=image&field=source&field=url&field=yield&field=ingredientLines";  
-  var requestUrl = recipeBaseUrl + recipeSearch + recipeAppId + recipeAppKey + recipeParams;
+    "&imageSize=THUMBNAIL&field=label&field=image&field=source&field=url&field=yield&field=ingredientLines";
+  var requestUrl = recipeBaseUrl + recipeSearch + recipeAppId + recipeAppKey + recipeParams + "&random=true";
 
   fetch(requestUrl)
     .then(function (res) {
@@ -59,11 +59,11 @@ function getMealTypeDetails(userSelection) {
     .then(function (data) {
       for (i = 0; i < 3; i++) {
         var detailObj = [],
-          recipe = { title: "", overview: "", imgPath: "" };        
-        detailObj.title = data.hits[i].recipe.label;        
-        detailObj.overview = data.hits[i].recipe.ingredientLines;        
-        detailObj.imgPath = data.hits[i].recipe.image;        
-        displaySearchResults(detailObj,searchType);
+          recipe = { title: "", overview: "", imgPath: "" };
+        detailObj.title = data.hits[i].recipe.label;
+        detailObj.overview = data.hits[i].recipe.ingredientLines;
+        detailObj.imgPath = data.hits[i].recipe.image;
+        displaySearchResults(detailObj, searchType);
       }
     });
 }
@@ -74,11 +74,11 @@ function getMovieByGenreId(id) {
   var searchType = "movie";
   fetch(
     MOVIE_BASE_URL +
-      MOVIE_DISCOVER +
-      MOVIE_API_KEY +
-      "&" +
-      MOVIE_GENRE_PARAM +
-      genreId
+    MOVIE_DISCOVER +
+    MOVIE_API_KEY +
+    "&" +
+    MOVIE_GENRE_PARAM +
+    genreId
   )
     .then(function (res) {
       return res.json();
@@ -89,7 +89,7 @@ function getMovieByGenreId(id) {
         detailObj.title = data.results[i].title;
         detailObj.overview = data.results[i].overview;
         detailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
-        displaySearchResults(detailObj,searchType);
+        displaySearchResults(detailObj, searchType);
       }
     });
 }
@@ -97,7 +97,7 @@ function getMovieByGenreId(id) {
 // dynamically creating and/or building the HTML that
 // will hold the search display results
 function displaySearchResults(detailObj, searchType) {
-  
+
   // variable to hold search type as defined in fetch/get call
   var searchResultsType = searchType;
 
@@ -164,7 +164,7 @@ function displaySearchResults(detailObj, searchType) {
 }
 
 // Receive user movie type selection, return movie details
-function getMovieDetails(userSelection) {  
+function getMovieDetails(userSelection) {
   var userGenre = userSelection;
   var genreId = "";
   var genreName = "";
@@ -201,7 +201,7 @@ function getMovieDetails(userSelection) {
 
   // pass genre ID of user selected genre to API call
   getMovieByGenreId(genreId);
-  
+
 }
 
 // event listener for users selections
