@@ -116,6 +116,7 @@ function displaySearchResults(detailObj, searchType) {
     var contentElId = "movie-content";
     var titleElId = "movie-title";
     var textElId = "movie-text";
+    localStorage.setItem("movieArray", JSON.stringify(movieArray));
   } else {
     var resultsElId = "recipe-results";
     var divTypeElId = "recipe";
@@ -123,6 +124,7 @@ function displaySearchResults(detailObj, searchType) {
     var contentElId = "recipe-content";
     var titleElId = "recipe-title";
     var textElId = "recipe-text";
+    localStorage.setItem("edamamArray", JSON.stringify(edamamArray));
   }
 
   // getting DOM div element to begin dynamic creation of search results
@@ -220,3 +222,38 @@ function getMovieDetails(userSelection) {
 
 // event listener for users selections
 MEAL_SEARCH_FORM.addEventListener("submit", searchHandler);
+
+
+var loadArrays = function () {
+  movieArray = JSON.parse(localStorage.getItem("movieArray"));
+  if (!movieArray) {
+    movieArray = [];
+  } if (movieArray.length != 0) {
+    for (i = 0; i < 3; i++) {
+      var searchType = "movie";
+      var detailObj = { title: "", overview: "", imgPath: "" };
+      detailObj.title = movieArray.results[i].title;
+      detailObj.overview = movieArray.results[i].overview;
+      detailObj.imgPath = MOVIE_IMG + movieArray.results[i].poster_path;
+      displaySearchResults(detailObj, searchType);
+    }
+  }
+  edamamArray = JSON.parse(localStorage.getItem("edamamArray"));
+  if (!edamamArray) {
+    edamamArray = [];
+  } if (edamamArray.length != 0) {
+    for (i = 0; i < 3; i++) {
+      var searchType = "recipe";
+      var detailObj = [],
+        recipe = { title: "", overview: "", imgPath: "", link: "" };
+      detailObj.title = edamamArray.hits[i].recipe.label;
+      detailObj.overview = edamamArray.hits[i].recipe.ingredientLines;
+      detailObj.imgPath = edamamArray.hits[i].recipe.image;
+      detailObj.link = edamamArray.hits[i].recipe.url;
+      displaySearchResults(detailObj, searchType);
+    }
+  }
+};
+
+loadArrays();
+
