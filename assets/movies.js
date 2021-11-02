@@ -21,6 +21,9 @@ var MOVIE_GENRE_LIST = { id: "", name: "" },
 
 var MEAL_SEARCH_FORM = document.querySelector("#mealSearch");
 
+var edamamArray = [];
+var movieArray = [];
+
 // capture users selections for meal type and movie genre
 function searchHandler(event) {
   event.preventDefault();
@@ -65,6 +68,7 @@ function getMealTypeDetails(userSelection) {
         detailObj.overview = data.hits[i].recipe.ingredientLines;
         detailObj.imgPath = data.hits[i].recipe.image;
         detailObj.link = data.hits[i].recipe.url;
+        edamamArray = data;
         displaySearchResults(detailObj, searchType);
       }
     });
@@ -91,6 +95,7 @@ function getMovieByGenreId(id) {
         detailObj.title = data.results[i].title;
         detailObj.overview = data.results[i].overview;
         detailObj.imgPath = MOVIE_IMG + data.results[i].poster_path;
+        movieArray = data;
         displaySearchResults(detailObj, searchType);
       }
     });
