@@ -164,9 +164,10 @@ function displaySearchResults(detailObj, searchType) {
   textEl.textContent = detailObj.overview;
   contentEl.appendChild(textEl);
 
-  var textEl = document.createElement("p");
+  var textEl = document.createElement("a");
   textEl.setAttribute("id", textElId);
   textEl.setAttribute("class", "flow-text");
+  textEl.setAttribute("href", detailObj.link);
   textEl.textContent = detailObj.link;
   contentEl.appendChild(textEl);
 }
