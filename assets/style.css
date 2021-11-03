@@ -1,0 +1,27 @@
+header {
+  width: 100%;
+  display: flex;
+  padding: 2%;
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(
+    to left,
+    rgb(13, 61, 218),
+    rgba(137, 196, 244, 1)
+  );
+}
+
+body {
+  font-family: "Zen Kurenaido", sans-serif;
+  background-image: linear-gradient(
+    to left,
+    rgb(13, 61, 218),
+    rgba(137, 196, 244, 1)
+  );
+  justify-content: center;
+  color: white;
+}
+
+.recipe-link {
+  color: white;
+}
