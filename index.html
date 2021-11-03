@@ -11,29 +11,35 @@
       href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/style.css" />
+    
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
+    <link rel="stylesheet" href="assets/style.css" />
     <title>Looking For Dinner and a Movie</title>
   </head>
 
   <body>
     <header>
-      <h1>Looking for Dinner and a Movie</h1>
-      <p>
+      <h1 class="header row center-align">Looking for Dinner and a Movie</h1>
+      <p class="row center-align">
        Select from the drop downs below and hit submit to get a dinner and a movie combination. 
       </p>
     </header>
 
     <!-- search form start -->
-    <div>
-      <div class="row">
-        <div class="col s12 m12 l12 center-align">
+  
+      
+        <div class="row s6 center-align">
           <h2>Make Your Selections!</h2>
+          </div>
+
           <form id="mealSearch">
-            <div class="input-field col s6 m4 l4">
+              
+              
+            <div class="row">
+                <div class="col s4 offset-s4">
               <select id="meal-type">
                 <option value="" disabled selected>Choose Meal Type</option>
                 <option value="breakfast">Breakfast</option>
@@ -42,7 +48,13 @@
                 <option value="snack">Snack</option>
               </select>
             </div>
-            <div class="input-field col s6 m4 l4" >
+        </div>
+              
+          
+            
+
+            <div class="row">
+                <div class="col s4 offset-s4">
               <select id="movie-dropdown">
                 <option value="" disabled selected>Choose Movie Genre</option>
                 <option value="action">Action</option>
@@ -53,22 +65,22 @@
                 <option value="documentary">Documentary</option>
                 <option value="drama">Drama</option>
               </select>
-            <button class="waves-effect waves-light btn col s6 m4 l4">Submit</button>
+              </div>
+              </div>
+             
+            <div class="row">
+            <button class="waves-effect waves-light btn col s4 offset-s4">Submit</button>
             </div>
+        
           </form>
-        </div>
+        
 
         <!-- Search form end -->
         <!-- Previous search - test only - this will be dynamical generated.
         We could have it only save the one previous search and just 
         overwrite the localStorage to make it easy -->
-      </div>
+      
 
-      <div class="row center-align">
-        <h2>Previous Search</h2>
-        <p class="col s6 m6 l6 flow-text">Action</p>
-        <p class="col s6 m6 l6 flow-text">Dinner</p>
-      </div>
       <!--End of previous search-->
 
       <!-- Search results - dynamical generated-->
@@ -80,8 +92,8 @@
         
         <!-- Movie results (dynamically generated through JavaScript) -->
         <div id="movie-results"></div>
-      </div>
-    </div>
+     
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/script.js"></script>
