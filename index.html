@@ -23,10 +23,7 @@
     <header>
       <h1>Looking for Dinner and a Movie</h1>
       <p>
-        √ Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum velit
-        officiis mollitia explicabo hic recusandae atque sunt et consectetur,
-        reiciendis aspernatur saepe aliquid commodi iusto aliquam quis ad amet
-        libero.
+       Select from the drop downs below and hit submit to get a dinner and a movie combination. 
       </p>
     </header>
 
@@ -35,8 +32,8 @@
       <div class="row">
         <div class="col s12 m12 l12 center-align">
           <h2>Make Your Selections!</h2>
-          <form id="mealSearch">
-            <div class="input-field col s12">
+          <form id="mealSearch" class="center-align">
+            <div class="input-field col s5 m5 l5">
               <select id="meal-type">
                 <option value="" disabled selected>Choose Meal Type</option>
                 <option value="breakfast">Breakfast</option>
@@ -45,7 +42,7 @@
                 <option value="snack">Snack</option>
               </select>
             </div>
-            <div class="input-field col s12" >
+            <div class="input-field col s5 m5 l5" >
               <select id="movie-dropdown">
                 <option value="" disabled selected>Choose Movie Genre</option>
                 <option value="action">Action</option>
@@ -57,7 +54,7 @@
                 <option value="drama">Drama</option>
               </select>
             </div>
-            <button class="waves-effect waves-light btn">Submit</button>
+            <button class="waves-effect waves-light btn col s4 m4 l4">Submit</button>
           </form>
         </div>
 
@@ -75,7 +72,7 @@
       <!--End of previous search-->
 
       <!-- Search results - dynamical generated-->
-      <div class="search-results center-align">
+      <div class="search-results center-align flow-text">
         <h2 id="searchResults">Search Results</h2>
 
         <!-- Recipe results (dynamically generated through JavaScript) -->
