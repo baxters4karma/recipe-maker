@@ -25,3 +25,29 @@ body {
 .recipe-link {
   color: white;
 }
+
+@media only screen and (max-width: 1200px) {
+  body {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    flex-wrap: wrap;
+    background: rgba(137, 196, 244, 1);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  header {
+    flex-wrap: wrap;
+    background: rgba(137, 196, 244, 1);
+  }
+}
