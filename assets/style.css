@@ -30,8 +30,29 @@ body {
 .recipe-link {
   color: white;
 }
+
+#logoInfo {
+  column-count: 2;
+}
+
+.teamLogo {
+  width: 200px;
+}
+
+#edamam-badge { 
+ width: 200px;
+ padding-left: 2vh;
+}
+
 .tmdb-logo {
   width: 200px;
+  padding-right: 2vh;
+}
+
+.logo-text {
+  column-count: 1;
+  font-size: 1.5vh;
+  padding-right: 2vh;
 }
 
 @media only screen and (max-width: 1200px) {
