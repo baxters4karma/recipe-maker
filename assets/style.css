@@ -30,6 +30,9 @@ body {
 .recipe-link {
   color: white;
 }
+.tmdb-logo {
+  width: 200px;
+}
 
 @media only screen and (max-width: 1200px) {
   body {
