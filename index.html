@@ -22,6 +22,7 @@
 
   <body>
     <header>
+      <img src="./assets/images/teamLogo.png" alt="" class="teamLogo" />
       <h1 class="header row center-align">Looking for Dinner and a Movie</h1>
       <p class="row center-align">
        Select from the drop downs below and hit submit to get a dinner and a movie combination. 
@@ -98,12 +99,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/script.js"></script>
     <script src="./assets/movies.js"></script>
+    <script src="https://developer.edamam.com/attribution/badge.js"></script>
   </body>
 
-  <footer>
+  <footer>    
     <h6 class="center-align">Dinner and a Movie</h6>
-    <a href="https://www.themoviedb.org/" target="_blank">
-      <img class="tmdb-logo" src="./assets/images/TMDB_logo.svg" alt="The Movie Database Logo">
-    </a>
+    <div id="logoInfo">      
+      <div class="left-align" id="edamam-badge" data-color="white"></div>
+      <div class="right-align">
+        <a href="https://www.themoviedb.org/" target="_blank">
+          <img class="tmdb-logo" src="./assets/images/TMDB_logo.svg" alt="The Movie Database Logo">
+        </a>
+        <br>
+        <div class="logo-text right-align">        
+          This product uses the TMDB API but is not endorsed or certified by TMDB.
+        </div>
+      </div>
+    </div>
+    
+
   </footer>
 </html>
