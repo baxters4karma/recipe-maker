@@ -1,18 +1,27 @@
-# recipe-maker
-Add ingredients, get recipe
+# Dinner and a Movie
+An application that allows the user to get for a movie and a meal recipe by searching by movie genre and meal type
 
-# Rest APIs
-## Spoonacular Food API
+# Demo
+### Example of application
+![GIF](./assets/images/Dinner-and-a-Movie.gif)
+### Link to application
+<a href="https://baxters4karma.github.io/recipe-maker/" target="_blank">Looking for Dinner and a Movie</a>
+
+# Rest APIs used
+## Edamam Recipe API
 ### Link
-https://spoonacular.com/food-api/docs
-### Licensing
-enter text here
+https://developer.edamam.com/
 ### Use
-enter text here
-## TheCocktailDB API
+Allows application to get a random recipe based on user selection of meal type
+
+## The Movie Database API
 ### Link
-https://www.thecocktaildb.com/api.php
-### Licensing
-Using the Test API key "1" during development and educational use
+https://www.themoviedb.org/documentation/api
 ### Use
-Replace 'vodka' in following link with type of alcohol from drop-down https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=vodka
+Allows application to get a random movie based on user selection of movie genre
+
+# Application Authors
+* Christine Baxter - <a href="https://github.com/baxters4karma" target="_blank">GitHub Link</a>
+* Naomi Eckhoff - <a href="https://github.com/Naomi-Eckhoff" target="_blank">GitHub Link</a>
+* Hank Kapka - <a href="https://github.com/hkapk" target="_blank">GitHub Link</a>
+* Adam Field - <a href="https://github.com/adamjfield" target="_blank">GitHub Link</a>
